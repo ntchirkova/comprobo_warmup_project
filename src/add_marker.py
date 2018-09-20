@@ -13,9 +13,9 @@ class AddMarker(object):
 
     def __init__(self):
         rospy.init_node("AddMarker")
-        self.pub = rospy.Publisher('visualization_marker', Marker, queue_size=10)
-        rospy.Subscriber('/bump', Bump, self.process_bump)
-        rospy.Subscriber('/scan', LaserScan, self.process_scan)
+        self.pub = rospy.Publisher('/visualization_marker', Marker, queue_size=10)
+        #.Subscriber('/bump', Bump, self.process_bump)
+        #rospy.Subscriber('/scan', LaserScan, self.process_scan)
 
     def process_bump(self, m):
         pass
@@ -23,23 +23,28 @@ class AddMarker(object):
 
     def draw_marker(self):
         marker = Marker()
-        marker.header.frame_id = "/odom"
+        marker.header.frame_id = "odom"
         marker.type = marker.SPHERE
         marker.pose.position.x = 1
         marker.pose.position.y = 2
         marker.pose.position.z = 0
-        marker.scale = [0.25, 0.25, 0.25]
-        marker.color.a = 0.75
+        marker.scale.x = 1
+	marker.scale.y = 1
+	marker.scale.z = 1
+        marker.color.a = 1.0;
+        marker.color.r = 0.0;
+        marker.color.g = 1.0;
+        marker.color.b = 0.0;
 
         self.pub.publish(marker)
 
     def run(self):
-        r = rospy.Rate(2)
+        #r = rospy.Rate(2)
 
         while not rospy.is_shutdown():
             print('here')
             self.draw_marker()
-            r.sleep()
+            rospy.sleep(.01)
 
 if __name__ == '__main__':
     node = AddMarker()
