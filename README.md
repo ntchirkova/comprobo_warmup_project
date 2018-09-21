@@ -1,6 +1,7 @@
 # CompRobo Warmup Project
 
 Anil Patel and Nina Tchirkova
+
 September 21, 2018
 
 ## Project Overview
