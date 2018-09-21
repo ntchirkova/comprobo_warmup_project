@@ -32,8 +32,8 @@ When a scan is received, we iterate through the data and convert it to cartesian
 ### RANSAC
 To find the slope of the wall in respect to the Neato we implemented a version of the Random Sample Consensus algorithm (RANSAC). Given the coordinates of all the points in a sample, the algorithm chooses two points pseudo randomly and then defines a line using them. Then, the rest of the points are tested to see if they lie on the line. The slope, intercept and how many points are on the line are saved. The process is then repeated as many times as there are points, if a line is found with a higher count of points on it than the one previously saved, it is replaced as the saved line. At the end, the line with the most points on it is returned. 
 
-*Video of Person Following first person:* [link](https://www.youtube.com/upload)
-*Video of Person Following third person:* [link](https://youtu.be/bs_17oStY-8)
+[Video of Person Following first person](https://www.youtube.com/upload)
+[Video of Person Following third person](https://youtu.be/bs_17oStY-8)
 
 ## Person Following
 To identify a person in the neato’s laser scan data we implemented a function that found the center of mass of the points in its view. We chose to constrict the algorithm to only process points that were in front of the robot.
@@ -43,7 +43,7 @@ To find the effective position of a person in the Neato’s view, we took the �
 
 ![Center of Mass Diagram](/images/com.png)
 
-*Video of Obstacle Avoidance:* [link](https://youtu.be/FgfwBXhXc2w)
+[Video of Obstacle Avoidance](https://youtu.be/FgfwBXhXc2w)
 
 ### Proportional Control
 Once we determined a desired target point, the neato’s angular and linear velocities were updated using proportional control. A desired distance away from the person we were tracking was defined as 0.5 meters, to account for the fact that the laser scanner is offset from the frontmost plane of the neato. The desired angle was set to 0, so that the neato was constantly trying to align itself with the object it was tracking. Kp values for angular and linear velocities were experimentally tuned so that the Neato followed the person it was tracking without overshooting and causing underdamped oscillation.
@@ -62,7 +62,7 @@ With a orientation vector was determined, the driving controls only needed an ad
 ## Finite-State Control
 We combined wall-following and obstacle avoidance in our finite-state control. When the program starts, the robot is avoiding obstacles, and when it finds a wall it changes state to follow it. Should any obstacles present themselves, the robot will change state to avoid them. The key addition here was the criteria for changing state.
 
-*Video of Finite State Control:* [link](https://youtu.be/juX2vZyGd-g)
+[Video of Finite State Control](https://youtu.be/juX2vZyGd-g)
 
 ### State Change
 Everytime a laser scan is processed, if a wall is discovered with more points than a certain threshold then the robot switches into wall following mode. Once a wall is not seen (points on line are less than the threshold, or the majority of points detected are of objects not walls), then the robot switches back into obstacle avoidance.
